@@ -1,4 +1,38 @@
 <%+header%>
-<h2><%:5GSmartCase%></h2>
-<iframe src="http://192.168.66.1:6677" style="width: 100%; height: 800px; border: none;"></iframe>
+<h2><%:UDX710_5G%></h2>
+
+<!-- 自动登录脚本 -->
+<script>
+  // 页面加载完成后自动提交登录表单
+  window.addEventListener('load', function () {
+    // 创建隐藏的登录表单
+    const form = document.createElement('form');
+    form.method = 'POST';
+    // 根据实际登录地址修改下面的 action
+    form.action = '/login';               // ← 目标登录接口
+    form.style.display = 'none';
+
+    // 用户名、密码字段（根据后端实际字段名调整）
+    const user = document.createElement('input');
+    user.type = 'hidden';
+    user.name = 'username';                // ← 后端接收的用户名字段名
+    user.value = 'admin';
+    form.appendChild(user);
+
+    const pwd = document.createElement('input');
+    pwd.type = 'hidden';
+    pwd.name = 'password';                 // ← 后端接收的密码字段名
+    pwd.value = 'admin';
+    form.appendChild(pwd);
+
+    // 将表单加入页面并立即提交
+    document.body.appendChild(form);
+    form.submit();
+  });
+</script>
+
+<!-- 目标页面通过 iframe 展示 -->
+<iframe src="http://192.168.66.1:6677"
+        style="width:100%; height:800px; border:none;"></iframe>
+
 <%+footer%>
